@@ -60,7 +60,8 @@ h1, h2, h3, h4, h5, p {
     }
 
     .line {
-        border-right: solid 4px #7e7f76;
+        border-top: dashed 1px #aaa;
+        padding-top: 10px;
     }
 
     .code-side {
