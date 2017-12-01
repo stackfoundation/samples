@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700"
  rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" rel="stylesheet" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link href="style.css" rel="stylesheet">
@@ -16,8 +17,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-bash.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
-            <div class="pure-g">
-                <div class="pure-u-1-2">
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
                     <div class="text">
                     <h1>
                         Need to run automated tests against your Java app?
@@ -30,7 +31,7 @@
                     </p>
                     </div>
                 </div>
-                <div class="pure-u-1-2 code">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
                     <div class="repo">
                         <i class="fa fa-github" aria-hidden="true"></i>
                         <div class="what">
@@ -40,8 +41,8 @@
                     </div>
                 </div>
             </div>
-            <div class="pure-g">
-                <div class="pure-u-1-2">
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
                     <div class="text">
                     <h2>
                         Run a workflow to automate your functional tests
@@ -51,21 +52,50 @@
                     </p>
                     </div>
                 </div>
-                <div class="pure-u-1-2 code">
-                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side"></div>
             </div>
-            <div class="pure-g">
-                <div class="pure-u-1-2">
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
                     <div class="text">
-                    <h2>
-                        A workflow that tests the Spring Pet Clinic
-                    </h2>
-                    <p>
-                        Workflows are just YAML files that can be run with Sandbox. Here's one that would do the above for the Spring Pet Clinic: build it, run MySQL, run the app, and then run tests. Let's take a look:
+                        <h2>
+                            A workflow that tests the Spring Pet Clinic
+                        </h2>
+                        <p>
+                            Workflows are just YAML files that can be run with Sandbox. Here's one that would do the above for the Spring Pet Clinic: build it, run MySQL, run the app, and then run tests. Let's take a look:
+                        </p>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side"></div>
+            </div>
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                    <p class="text-right">
+
+                        We run a service step, which can expose ports -><br>
+                        using a mysql docker hub image -><br>
+                        <br>
+                        we specify our source code should not be added to this image -><br>
+                        and set some environment variables -><br>
+                        <br>
+                        <br>
+                        <br>
+                        we set the mysql port -><br>
+                        <br>
+                        and detemine the service to be ready when that port is open -><br>
+                        <br>
+                        <br>
+                        a run step will start once the previous step is ready -><br>
+                        <br>
+                        using a mave Docker hub image -><br>
+                        <br>
+                        it is set to run a script on start -><br>
+                        <br>
+                        and to connect the following local paths to the image -><br>
                     </p>
                     </div>
                 </div>
-                <div class="pure-u-1-2 code">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
                     <pre><code class="language-yaml">steps:
   - service:
       image: mysql:5.7.20
@@ -92,19 +122,21 @@
 </code></pre>    
                 </div>
             </div>
-            <div class="section">
-                <div class="left">
-                    <p>
-                        You can read more about how Sandbox does this here.
-                    </p>
-                    <p>
-                        As a user, you don’t need to go through the hassle of installing a tool to know if it’s right for you – it just works. Also, as the workflow files are very clear and simple to read, they can get a sense of what needed to happen to make the application run, just by glancing at them.
-                    </p>
-                    <p>
-                        As a developer, your tool can be that easy to share, and that easy to get running on someone else’s machine, with no issues and very little time spent. That means more time and user patience left to try out your creation, and a lower barrier of entry overall!
-                    </p>
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                        <p>
+                            You can read more about how Sandbox does this here.
+                        </p>
+                        <p>
+                            As a user, you don’t need to go through the hassle of installing a tool to know if it’s right for you – it just works. Also, as the workflow files are very clear and simple to read, they can get a sense of what needed to happen to make the application run, just by glancing at them.
+                        </p>
+                        <p>
+                            As a developer, your tool can be that easy to share, and that easy to get running on someone else’s machine, with no issues and very little time spent. That means more time and user patience left to try out your creation, and a lower barrier of entry overall!
+                        </p>
+                    </div>
                 </div>
-                <div class="right"></div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side"></div>
             </div>
     </body>
 </html>
