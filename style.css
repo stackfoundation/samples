@@ -27,6 +27,17 @@ h1, h2, h3, h4, h5, p {
     background-color: #272822;
     font-size: 16px;
     line-height: 1.5em;
+    padding: 1.5em 0;
+}
+
+@media screen and (min-width: 48em) {
+    .text {
+        padding: 0 50px;
+    }
+
+    .code-side {
+        padding: 0;
+    }
 }
 
 .repo {
@@ -46,14 +57,14 @@ h1, h2, h3, h4, h5, p {
 
 :not(pre)>code[class*=language-], pre[class*=language-] {
     background: #272822;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0) 50%);
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0) 50%);
     background-size: 3em 3em;
     background-origin: content-box;
-    background-attachment: local;
+    background-attachment: local; */
     margin: .5em 0px;
     padding: 0px 2em;
     border-radius: 0;
-    margin-bottom: 1.5em;
+    margin-bottom: 0em;
     margin-top: 0px;
     font-size: 16px;
     line-height: 1.5em;

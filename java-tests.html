@@ -70,59 +70,103 @@
             <div class="pure-g section">
                 <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
                     <div class="text">
-                    <p class="text-right">
-
-                        We run a service step, which can expose ports -><br>
-                        using a mysql docker hub image -><br>
-                        <br>
-                        we specify our source code should not be added to this image -><br>
-                        and set some environment variables -><br>
-                        <br>
-                        <br>
-                        <br>
-                        we set the mysql port -><br>
-                        <br>
-                        and detemine the service to be ready when that port is open -><br>
-                        <br>
-                        <br>
-                        a run step will start once the previous step is ready -><br>
-                        <br>
-                        using a mave Docker hub image -><br>
-                        <br>
-                        it is set to run a script on start -><br>
-                        <br>
-                        and to connect the following local paths to the image -><br>
-                    </p>
+                        <p>
+                            We run a service step, which can expose ports
+                            using a mysql docker hub image
+                        </p>
                     </div>
                 </div>
                 <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
                     <pre><code class="language-yaml">steps:
   - service:
       image: mysql:5.7.20
-      source:
+</code></pre>    
+                </div>
+            </div>
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                        <p>
+                            we specify our source code should not be added to this image
+                            and set some environment variables
+                        </p>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+                    <pre><code class="language-yaml">      source:
         omit: true
       environment:
        - name: MYSQL_ROOT_PASSWORD
          value: pass
-      ports:
+</code></pre>    
+                </div>
+            </div>
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                        <p>
+                            we set the mysql port
+                            and detemine the service to be ready when that port is open
+                        </p>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+                    <pre><code class="language-yaml">      ports:
        - container: 3306
          internal: 3306
       readiness:
         tcp:
           port: 3306
-  - run:
+</code></pre>    
+                </div>
+            </div>
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                        <p>
+                            a run step will start once the previous step is ready
+                            using a maven Docker hub image
+                        </p>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+                    <pre><code class="language-yaml">  - run:
       name: Build application
       image: maven:3.5.2-jdk-8
-      script: |-
+</code></pre>    
+                </div>
+            </div>
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                        <p>
+                            it is set to run a script on start
+                        </p>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+                    <pre><code class="language-yaml">      script: |-
         cd /app
         mvn clean install
-      volumes:
+</code></pre>    
+                </div>
+            </div>
+            <div class="pure-g section">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+                    <div class="text">
+                        <p>
+                                and to connect the following local paths to the image
+                        </p>
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+                    <pre><code class="language-yaml">      volumes:
         - mountPath: /root/.m2
           hostPath: ./.m2
 </code></pre>    
                 </div>
             </div>
-            <div class="pure-g">
+            <div class="pure-g section">
                 <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
                     <div class="text">
                         <p>
