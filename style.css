@@ -38,9 +38,29 @@ h1, h2, h3, h4, h5, p {
     padding: 1.5em 0;
 }
 
+.empty {
+    display: none;
+}
+
+.arrow {
+    display: none;
+}
+
 @media screen and (min-width: 48em) {
     .text {
         padding: 0 50px;
+    }
+    
+    .arrow {
+        display: block;
+    }
+    
+    .empty {
+        display: block;
+    }
+
+    .line {
+        border-right: solid 4px #7e7f76;
     }
 
     .code-side {
@@ -79,4 +99,27 @@ h1, h2, h3, h4, h5, p {
     margin-top: 0px;
     font-size: 16px;
     line-height: 1.5em;
+}
+
+.arrow {
+    float: right;
+    font-size: 3em;
+}
+
+.break {
+    margin-top: 80px;
+    border-top: solid 1px #aaa;
+}
+
+.trouble {
+    display: block;
+    padding-top: 20px;
+    font-size: 1.2em !important;
+    text-align: center;
+}
+
+a, a:visited, a:hover {
+    font-weight: 600;
+    color: #3e5d9b;
+    text-decoration: none;
 }

@@ -1,188 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700"
- rel="stylesheet" type="text/css">
- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" crossorigin="anonymous">
- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css" crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" rel="stylesheet" />
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet">
-    </head>
-    <body>        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                    <h1>
-                        Need to run automated tests against your Java app?
-                    </h1>
-                    <p>In order to run automated functional tests, you need to spin up your application, together with it's dependencies: a database, a cache, etc.
-                    </p>
-                    <p>You may still be doing this the old fashioned way: start MySQL separately, start Redis, then your application, and then run your tests. And you're probably got these instructions documented in your team's Wiki. 
-                    </p>
-                    <p>You might be a bit more advanced: you have a few Dockerfiles, together with a Docker Compose file to spin up the application, and then you run your tests against the Dockerized version. Again, your Wiki probably tells your team how to setup Docker, build images, run Docker Compose, and your tests.
-                    </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <a href="https://github.com/stackfoundation/sandbox" target="_blank">
-                        <div class="repo">
-                            <i class="fa fa-github" aria-hidden="true"></i>
-                            <div class="what">
-                                This is a sample for the
-                                open source Sandbox tool.
-                            </div>
-                        </div>
-                    </a>
-                </div>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h1>
+                    Need to run automated tests against your Java app?
+                </h1>
+                <p>In order to run automated functional tests, you need to spin up your application, together with all it's
+                    dependencies - that might include a database, a cache, etc.
+                </p>
+                <p>You may still be doing this the old fashioned way: start MySQL separately, start Redis, then your application,
+                    and then run your tests. And you probably have these instructions documented in a team Wiki.
+                </p>
+                <p>Perhaps you're doing it better: you have a few Dockerfiles, together with a Docker Compose file to spin up
+                    the application, and then you run your tests against the Dockerized version. Again, your Wiki probably
+                    tells your team how to setup Docker, build images, run Docker Compose, and your tests.
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                    <h2>
-                        Run a workflow to automate your functional tests
-                    </h2>
-                    <p>
-                        There's a better way to automate it all. With Docker-based workflows, you can create a list of steps that automate the entire process: build your application, run the third-party services, run your application, and then run your tests. And your team can execute the workflow immediately, straight out of your Git repository with Sandbox.
-                    </p>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <a href="https://github.com/stackfoundation/sandbox" target="_blank">
+                <div class="repo">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                    <div class="what">
+                        This is a sample for the open source Sandbox tool
                     </div>
                 </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side"></div>
+            </a>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    Run a workflow to automate your functional tests
+                </h2>
+                <p>
+                    There's an even simpler way still to automate it all. With Docker-based workflows, you can create a list of steps that automate
+                    the entire process: run third-party services, run your application, and then run your tests. And your
+                    team can execute the workflow immediately, right after checking out your Git repository, using Sandbox.
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <h2>
-                            A workflow that tests the Spring Pet Clinic
-                        </h2>
-                        <p>
-                            Workflows are just YAML files that can be run with Sandbox. Here's one that would do the above for the Spring Pet Clinic: build it, run MySQL, run the app, and then run tests. Let's take a look:
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side"></div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    A workflow that tests the Spring Pet Clinic
+                </h2>
+                <p>
+                    The workflows that Sandbox runs are just YAML files. Here's one that automates what we've described so far for the Spring
+                    Pet Clinic: it runs MySQL, runs the Pet Clinic app, and then runs tests. Let's take a look:
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                            We run a service step, which can expose ports
-                            using a mysql docker hub image
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <pre><code class="language-yaml">steps:
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Workflows define a sequence of steps. This one begins with a service step, which starts MySQL, using an
+                    <a href="https://hub.docker.com/_/mysql/" target="blank">official MySQL Docker image</a>.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">steps:
   - service:
       image: mysql:5.7.20
-</code></pre>    
-                </div>
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Normally all project source files are added to images created for steps. Here we request that source files are omitted for
+                    the MySQL service. In addition, we set the root password as an environment variable.
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                            we specify our source code should not be added to this image
-                            and set some environment variables
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <pre><code class="language-yaml">      source:
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      source:
         omit: true
       environment:
        - name: MYSQL_ROOT_PASSWORD
          value: pass
-</code></pre>    
-                </div>
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Here, the MySQL port is exposed "internally" to other workflow steps. It is exposed under the name "mysql", which allows
+                    other step containers to resolve that name using DNS (our app is going to use <code>jdbc:mysql://mysql/test</code>).
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                            we set the mysql port
-                            and detemine the service to be ready when that port is open
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <pre><code class="language-yaml">      ports:
-       - container: 3306
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      ports:
+       - name: mysql
+         container: 3306
          internal: 3306
-      readiness:
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    We tell Sandbox to check that TCP port 3306 (the MySQL port) can be reached before considering the service ready. It will
+                    wait for the service to be ready before continuing.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      readiness:
         tcp:
           port: 3306
-</code></pre>    
-                </div>
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The second step builds and runs the app, and runs functional tests. It uses an
+                    <a href="https://hub.docker.com/_/maven/" target="blank">official Maven Docker image</a> to run a Maven goal.
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                            a run step will start once the previous step is ready
-                            using a maven Docker hub image
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <pre><code class="language-yaml">  - run:
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">  - run:
       name: Build application
       image: maven:3.5.2-jdk-8
-</code></pre>    
-                </div>
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The script is run within the step's Docker container - here you can see it runs a Maven goal for tests.
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                            it is set to run a script on start
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <pre><code class="language-yaml">      script: |-
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      script: |-
         cd /app
-        mvn clean install
-</code></pre>    
-                </div>
+        mvn clean install tests
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Mounting the
+                    <code>.m2</code> folder within the project at
+                    <code>/root/.m2</code> will mean that the local Maven repository can be re-used on subsequent runs of the workflow, without
+                    having to re-create it from scratch every time.
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                                and to connect the following local paths to the image
-                        </p>
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
-                    <pre><code class="language-yaml">      volumes:
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      volumes:
         - mountPath: /root/.m2
           hostPath: ./.m2
-</code></pre>    
-                </div>
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    Run your tests immediately after checkout, no setup required!
+                </h2>
+                <p>
+                    The workflow above automates the entire process. And it can be run immediately after checkout if you commit both your workflow
+                    and Sandbox into your Git repo (Sandbox is
+                    <i>tiny</i> - under 200KB just so you can do this). No other software installation
+                    or setup is required! No databases, no caches, no Docker! And no long Wiki instructions required!
+                </p>
             </div>
-            <div class="pure-g section">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
-                    <div class="text">
-                        <p>
-                            You can read more about how Sandbox does this here.
-                        </p>
-                        <p>
-                            As a user, you don’t need to go through the hassle of installing a tool to know if it’s right for you – it just works. Also, as the workflow files are very clear and simple to read, they can get a sense of what needed to happen to make the application run, just by glancing at them.
-                        </p>
-                        <p>
-                            As a developer, your tool can be that easy to share, and that easy to get running on someone else’s machine, with no issues and very little time spent. That means more time and user patience left to try out your creation, and a lower barrier of entry overall!
-                        </p>
-                    </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <div class="arrow">
+                    <i class="fa fa-share" aria-hidden="true"></i>
                 </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side"></div>
+                <h2>
+                    Try it yourself
+                </h2>
+                <p>
+                    We setup a sample repo at <a href="https://github.com/stackfoundation/sbox-java-tests" target="blank">https://github.com/stackfoundation/sbox-java-tests</a> so you can try how easy it can be yourself. Just clone and run the workflow using Sandbox, which is included in the repo!
+                </p>
             </div>
-    </body>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-generic">git clone https://github.com/stackfoundation/sbox-java-tests
+cd sbox-java-tests
+./sbox run functional-tests
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side break">
+            <div class="text">
+                <p class="trouble">
+                    <a href="https://github.com/stackfoundation/sandbox/issues/new" target="blank">
+                        <i class="fa fa-bug" aria-hidden="true"></i>
+                        Had issues running this? Please let us know!
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty">
+        </div>
+    </div>
+</body>
+
 </html>
