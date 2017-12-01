@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700"
+ rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
+            <div class="pure-g">
+                <div class="pure-u-1-2">
+                    <div class="text">
+                    <h1>
+                        Need to run automated tests against your Java app?
+                    </h1>
+                    <p>In order to run automated functional tests, you need to spin up your application, together with it's dependencies: a database, a cache, etc.
+                    </p>
+                    <p>You may still be doing this the old fashioned way: start MySQL separately, start Redis, then your application, and then run your tests. And you're probably got these instructions documented in your team's Wiki. 
+                    </p>
+                    <p>You might be a bit more advanced: you have a few Dockerfiles, together with a Docker Compose file to spin up the application, and then you run your tests against the Dockerized version. Again, your Wiki probably tells your team how to setup Docker, build images, run Docker Compose, and your tests.
+                    </p>
+                    </div>
+                </div>
+                <div class="pure-u-1-2 code">
+                    <div class="repo">
+                        <i class="fa fa-github" aria-hidden="true"></i>
+                        <div class="what">
+                          This is a sample for the
+                          open source Sandbox tool.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pure-g">
+                <div class="pure-u-1-2">
+                    <div class="text">
+                    <h2>
+                        Run a workflow to automate your functional tests
+                    </h2>
+                    <p>
+                        There's a better way to automate it all. With Docker-based workflows, you can create a list of steps that automate the entire process: build your application, run the third-party services, run your application, and then run your tests. And your team can execute the workflow immediately, straight out of your Git repository with Sandbox.
+                    </p>
+                    </div>
+                </div>
+                <div class="pure-u-1-2 code">
+                </div>
+            </div>
+            <div class="pure-g">
+                <div class="pure-u-1-2">
+                    <div class="text">
+                    <h2>
+                        A workflow that tests the Spring Pet Clinic
+                    </h2>
+                    <p>
+                        Workflows are just YAML files that can be run with Sandbox. Here's one that would do the above for the Spring Pet Clinic: build it, run MySQL, run the app, and then run tests. Let's take a look:
+                    </p>
+                    </div>
+                </div>
+                <div class="pure-u-1-2 code">
+                    <pre><code class="language-yaml">steps:
+  - service:
+      image: mysql:5.7.20
+      source:
+        omit: true
+      environment:
+       - name: MYSQL_ROOT_PASSWORD
+         value: pass
+      ports:
+       - container: 3306
+         internal: 3306
+      readiness:
+        tcp:
+          port: 3306
+  - run:
+      name: Build application
+      image: maven:3.5.2-jdk-8
+      script: |-
+        cd /app
+        mvn clean install
+      volumes:
+        - mountPath: /root/.m2
+          hostPath: ./.m2
+</code></pre>    
+                </div>
+            </div>
+            <div class="section">
+                <div class="left">
+                    <p>
+                        You can read more about how Sandbox does this here.
+                    </p>
+                    <p>
+                        As a user, you don’t need to go through the hassle of installing a tool to know if it’s right for you – it just works. Also, as the workflow files are very clear and simple to read, they can get a sense of what needed to happen to make the application run, just by glancing at them.
+                    </p>
+                    <p>
+                        As a developer, your tool can be that easy to share, and that easy to get running on someone else’s machine, with no issues and very little time spent. That means more time and user patience left to try out your creation, and a lower barrier of entry overall!
+                    </p>
+                </div>
+                <div class="right"></div>
+            </div>
+    </body>
+</html>
