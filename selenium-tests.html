@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,300,100,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <title>Need to quickly run selenium tests against multiple browsers? - Sandbox sample</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h1>
+                    Need to quickly run selenium tests against multiple browsers?
+                </h1>
+                <p>Selenium is a great tool for running automated browser tests, but it requires installation and maintenance, and is dependent on browser drivers installled in the host machine 
+                </p>
+                <p>Running Selenium-Server containerised solves this problem: images contain stable versions of the browser drivers that can be tested against in any machine, consistently.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <a href="https://github.com/stackfoundation/sandbox" target="_blank">
+                <div class="repo">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                    <div class="what">
+                        This is a sample for the open source Sandbox tool
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    Run Selenium with a Sandbox workflow
+                </h2>
+                <p>
+                    There's an simple way still to dockerise Selenium. With Docker-based workflows, you can create a list of steps that automate
+                    both setting up Selenium-Server and running Selenium tests with the Selenium-Driver
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    Booting Selenium-Server using Sandbox
+                </h2>
+                <p>
+                    The workflows that Sandbox runs are just YAML files. Here's one that automates Booting up a Selenium Hub instance, plus two nodes connected to it - Firefox and Chrome.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Workflows define a sequence of steps. This one begins with a service step, which starts Selenium Hub, using an
+                    <a href="https://hub.docker.com/r/selenium/hub/" target="blank">official Selenium Hub Docker image</a>.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">steps:
+  - service:
+      name: Selenium Hub
+      image: 'selenium/hub'
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Normally all project source files are added to images created for steps. Here we request that source files are omitted for
+                    the Selenium Hub service.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      source:
+        exclude:
+          - '*'
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Here, the Selenium port is exposed "internally" to other workflow steps. It is exposed under the name <code>hub</code>, which allows
+                    other step containers to resolve that name using DNS (our app is going to use the url
+                    <code>http://hub:4444/wd/hub</code>).
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      ports:
+        - name: 'hub'
+          container: 4444
+          internal: 4444
+          external: 31044
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    We tell Sandbox to check that TCP port 4444 (the Selenium port) can be reached before considering the service ready. It will
+                    wait for the service to be ready before continuing.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      readiness:
+        tcp:
+          port: 4444
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The second and third steps run the browser nodes the Selenium Hub will use. They use 
+                    <a href="https://hub.docker.com/u/selenium/" target="blank">official Docker images</a>. By default, both will connect internally to <code>http://hub:4444/wd/hub</code>, which is the previous service image. 
+                </p>
+                <p>
+                    This step is a <b>run</b> step, with a <b>parallel</b> field set to true. This tells the workflow that the next step does not need to wait on this one to finish, so they will both run simultaneously.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">  - run :
+      name: Selenium Chrome
+      image: 'selenium/node-chrome' 
+      parallel: true
+      source:
+        exclude:
+          - '*'
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The last step is a <b>run</b> step, as was the one before. It runs parallel to the previous step, and as it never completes, keeps the workflow running indefinitely.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">  - run :
+      name: Selenium Firefox
+      image: 'selenium/node-firefox'
+      source:
+        exclude:
+          - '*'
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    Running Selenium tests against the running server
+                </h2>
+                <p>
+                    Now that the server is running, we can start testing using another workflow. This could also be done using a single workflow, but this way we can run the tests multiple times against the same Selenium-Server running instance.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The first step will install our testing application with npm, using an
+                    <a href="https://hub.docker.com/_/node/" target="blank">official Node Docker image</a>.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">steps:
+  - run:
+      name: Install application
+      image: 'node:8-alpine'
+  - run:
+      name: Run tests
+      step: Install application
+      source:
+        exclude:
+          - node_modules
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    We include only <code>package.json</code> from our source files, and aset cache to true. Doing this ensure the (potentially lengthy) installation step happens only once, and is redone only if dependencies have changed.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      cache: true
+      source:
+        include:
+          - package.json
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    Dependencies are installed by defining a script to be run on this image.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      script: |-
+        cd app
+        npm install
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The second step runs the tests. It uses as an image the one generated in the previous step, with the dependencies installed. As we expect dependencies to have been installed under <code>node_modules</code>, we exclude them from the included source files, preventing any overwriting.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">  - run:
+      name: Run tests
+      step: Install application
+      source:
+        exclude:
+          - node_modules
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text line">
+                <p>
+                    The <b>script</b> field runs the tests for both browsers.
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-yaml">      script: |-
+        cd app
+        SELENIUM_BROWSER=chrome \
+        npm run start
+        SELENIUM_BROWSER=firefox \
+        npm run start
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g section">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <h2>
+                    Run your tests immediately after checkout, no setup required!
+                </h2>
+                <p>
+                    The workflow above automates the entire process. And it can be run immediately after checkout if you commit both your workflow
+                    and Sandbox into your Git repo (Sandbox is
+                    <i>tiny</i> - under 200KB just so you can do this). No other software installation or setup is required!
+                    No databases, no caches, no Docker! And no long Wiki instructions required!
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty"></div>
+    </div>
+
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side">
+            <div class="text">
+                <div class="arrow">
+                    <i class="fa fa-share" aria-hidden="true"></i>
+                </div>
+                <h2>
+                    Try it yourself
+                </h2>
+                <p>
+                    We setup a sample repo at
+                    <a href="https://github.com/stackfoundation/sbox-selenium-tests" target="blank">https://github.com/stackfoundation/sbox-selenium-tests</a> so you can try how easy it can be yourself. Just
+                    clone and run the workflow using Sandbox, which is included in the repo!
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side">
+            <pre><code class="language-bash">git clone https://github.com/stackfoundation/sbox-selenium-tests
+cd sbox-selenium-tests
+./sbox run start-server
+[in a new terminal]
+./sbox run selenium-tests
+</code></pre>
+        </div>
+    </div>
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-1-3 text-side break">
+            <div class="text">
+                <p class="trouble">
+                    <a href="https://github.com/stackfoundation/sandbox/issues/new" target="blank">
+                        <i class="fa fa-bug" aria-hidden="true"></i>
+                        Had issues running this? Please let us know!
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-xl-2-3 code-side empty">
+        </div>
+    </div>
+</body>
+
+</html>
